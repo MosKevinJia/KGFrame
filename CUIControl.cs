@@ -107,20 +107,55 @@ namespace KGFrame
 
 
     /// <summary>
-    /// 通用控件类
-    /// 
-    /// 
+    /// 通用控件类 
     /// </summary>
     public class CUIControl : Spirit
     {
+
+        /// <summary>
+        /// 全局控件容器
+        /// </summary>
+        public static List<CUIControl> Store = new List<CUIControl>(); 
+        
+        /// <summary>
+        /// 添加
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public static CUIControl Add(CUIControl c)
+        {
+            Store.Add(c); 
+            return c;
+        }
+
+        /// <summary>
+        /// 清空
+        /// </summary>
+        public static void ClearAllControl()
+        {
+            Store.Clear();
+            Store = new List<CUIControl>();
+        }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="c"></param>
+        public static void Remove(CUIControl c)
+        {
+            GameObject.Destroy(c.gameObject);
+            Store.Remove(c);
+        }
+
+
         private decimal             _dValue; 
         private string              _strValue;  
         public ControlType          Type                = ControlType.Button;                                  //控件类型a
-        public ControlState         State               = ControlState.Normal;                                 //控件默认状态
-
-        public string               BindValue;
+        public ControlState         State               = ControlState.Normal;                                 //控件默认状态 
+        public string               BindValue; 
+        public int                  LangID; 
         private RectTransform       rect;
-
+        
 
         public bool show
         {
@@ -153,9 +188,13 @@ namespace KGFrame
         private bool                bShow               = true;
         private EventTriggerListener mEventListener     = null;
         private Vector3             vDefaultPos         = Vector3.zero;
+         
 
- 
 
+        private void Awake()
+        { 
+            CUIControl.Add(this);
+        }
 
 
         /// <summary>
@@ -167,7 +206,7 @@ namespace KGFrame
         {
 
             if (bInit)
-                return;
+                return; 
 
             switch (Type)
             {
@@ -379,7 +418,7 @@ namespace KGFrame
         public virtual CUIControl SetText(string strText)
         {
  
-            SerializeControl();
+            SerializeControl(); 
 
             if (this.Type == ControlType.Label)
             { 
@@ -388,6 +427,10 @@ namespace KGFrame
             else if (this.Type == ControlType.InputField)
             { 
                 _strValue = input.text = strText; 
+            }
+            else if (this.Type == ControlType.Button)
+            { 
+                _strValue = Internal_Text.GetComponent<Text>().text = strText;
             }
             return this;
         }

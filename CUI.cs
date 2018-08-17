@@ -12,8 +12,9 @@ using System.Collections.Generic;
  * 使用简单\方便扩展
  * 所有控件统一方法: SetValue   GetValue  SetText  GetText
  * 常用Alpha Scale Tween 特效
- * 极大的减轻UI制作的工作量, 在一般常见UI情况下, 减少超过80%代码工作.
- * MVVM 模式
+ * 极大的减轻UI制作的工作量
+ * 
+ * 增加i18n 多语言切换
  * 
  * 
  */
@@ -24,7 +25,6 @@ using System.Collections.Generic;
  *   
  *  1.UI逻辑与UI本身交织在一起,   UI改了, UI逻辑也要改.  复杂的交叉调用到后期就越来越麻烦
  *  2.不同的控件的获得值的方法不一样. 所以UI控件一改, 大量的逻辑代码也要改动.  所以,应该把所有控件的基础方法统一. 
- *  3.调用滑动特效有点麻烦.虽然有itween类.  不过还是最好有一,二句代码就能简单做到.
  *   
  * 
  */

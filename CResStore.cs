@@ -465,7 +465,7 @@ namespace KGFrame
     public class Spirit : MonoBehaviour
     {
         [System.NonSerialized]
-        public int      iInstanceId;                      // Id
+        public int      iInstanceId = ResStore.NEW_ID;                      // Id
         [System.NonSerialized]
         public int      iInstanceType;                    // 类型
     }
